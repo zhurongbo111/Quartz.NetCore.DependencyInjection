@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Gary Zhu</Authors>
+    <Version>1.0.1</Version>
+    <PackageProjectUrl>https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection</RepositoryUrl>
+    <PackageTags>Quartz,DependencyInjection</PackageTags>
+    <Description>The project is the extensions of Quartz for .net core project, it benefits you from DependencyInjection.
+Welcome to open issue in https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection/issues</Description>
   </PropertyGroup>
 
   <ItemGroup>
