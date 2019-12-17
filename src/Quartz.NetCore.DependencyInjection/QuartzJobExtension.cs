@@ -36,18 +36,7 @@ namespace Quartz.NetCore.DependencyInjection
             return services;
         }
 
-        public static IServiceProvider UseQuartzJob<TJob>(this IServiceProvider applicationServices, Func<JobBuilder, IJobDetail> configJobDetail, string schedName) where TJob : IJob
-        {
-            var jobBuild = JobBuilder.Create<TJob>();
-            var jobDetail = configJobDetail?.Invoke(jobBuild);
-            var schedulerFactory = applicationServices.GetRequiredService<ISchedulerFactory>();
-            IScheduler schedule = GetScheduler(schedulerFactory, schedName);
-            schedule.JobFactory = applicationServices.GetRequiredService<IJobFactory>();
-            schedule.AddJob(jobDetail, true);
-            return applicationServices;
-        }
-
-        public static IServiceProvider UseQuartzJobWithTrigger<TJob>(this IServiceProvider applicationServices, Func<JobBuilder, IJobDetail> configJobDetail, Func<TriggerBuilder, ITrigger> configTrigger, string schedName)
+        public static IServiceProvider UseQuartzJob<TJob>(this IServiceProvider applicationServices, Func<JobBuilder, IJobDetail> configJobDetail = null, Func<TriggerBuilder, ITrigger> configTrigger = null, string schedName = null)
             where TJob : IJob
         {
             var jobBuild = JobBuilder.Create<TJob>();
@@ -75,7 +64,7 @@ namespace Quartz.NetCore.DependencyInjection
                    ssb => ssb.WithInterval(intervalTime)
                              .RepeatForever())
                 .Build();
-            applicationServices.UseQuartzJobWithTrigger<TJob>(configJobDetail, configTrigger, DefaultSechedule);
+            applicationServices.UseQuartzJob<TJob>(configJobDetail, configTrigger, DefaultSechedule);
             return applicationServices;
         }
 
