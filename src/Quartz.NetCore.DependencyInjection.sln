@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.NetCore.DependencyInjection", "Quartz.NetCore.DependencyInjection\Quartz.NetCore.DependencyInjection.csproj", "{AA453793-5103-487A-BEA2-E9782DA7864A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.NetCore.DependencyInjection.Test", "Quartz.NetCore.DependencyInjection.Test\Quartz.NetCore.DependencyInjection.Test.csproj", "{AB21E7E9-9F8E-409B-939F-B4BAEF6FDE67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA453793-5103-487A-BEA2-E9782DA7864A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA453793-5103-487A-BEA2-E9782DA7864A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA453793-5103-487A-BEA2-E9782DA7864A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA453793-5103-487A-BEA2-E9782DA7864A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB21E7E9-9F8E-409B-939F-B4BAEF6FDE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB21E7E9-9F8E-409B-939F-B4BAEF6FDE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB21E7E9-9F8E-409B-939F-B4BAEF6FDE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB21E7E9-9F8E-409B-939F-B4BAEF6FDE67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {801F07F1-802B-4638-BC7F-CF940D9FBED7}
+	EndGlobalSection
+EndGlobal
