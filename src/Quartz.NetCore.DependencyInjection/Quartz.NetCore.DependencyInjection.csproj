@@ -11,7 +11,7 @@
 Welcome to open issue in https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection/issues</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright></Copyright>
-    <PackageLicenseExpression>https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection/blob/master/LICENSE</PackageLicenseExpression>
+    <PackageLicenseUrl>https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
