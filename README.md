@@ -16,6 +16,10 @@ Features
 --------
 Quartz.NetCore.DependencyInjection is a [NuGet library](https://www.nuget.org/packages/Quartz.NetCore.DependencyInjection) that you can add into your project that will benefit you from DependencyInjection for Quartz Job.
 
+Examples
+--------
+please see the example:https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection/tree/master/samples/
+
 Usage
 --------
 First of all, add this namespace:
