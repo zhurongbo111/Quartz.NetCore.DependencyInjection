@@ -79,6 +79,26 @@ namespace Quartz.NetCore.DependencyInjection
             return applicationServices;
         }
 
+        /// <summary>
+        /// Run this job only once, it is suitable for log time job
+        /// </summary>
+        /// <typeparam name="TJob"></typeparam>
+        /// <param name="applicationServices"></param>
+        /// <param name="startTime"></param>
+        /// <returns></returns>
+        public static IServiceProvider UseQuartzJobForOneTime<TJob>(this IServiceProvider applicationServices, DateTime startTime)
+            where TJob : IJob
+        {
+            Func<JobBuilder, IJobDetail> configJobDetail = jobBuilder => jobBuilder.WithIdentity(GetDefaultJobKey<TJob>()).Build();
+
+            Func<TriggerBuilder, ITrigger> configTrigger = triggerBuild => triggerBuild.WithIdentity(GetDefaultTriggerKey<TJob>())
+                .StartAt(startTime)
+                .Build();
+            applicationServices.UseQuartzJob<TJob>(configJobDetail, configTrigger, DefaultSechedule);
+            return applicationServices;
+        }
+
+
         public static void StopQuartzJob(this IServiceProvider applicationServices, bool waitForJobsToComplete = true)
         {
             var schedulerFactory = applicationServices.GetRequiredService<ISchedulerFactory>();
