@@ -17,7 +17,7 @@ namespace AspNetCoreSample
         }
         public Task Execute(IJobExecutionContext context)
         {
-            this.logger.LogInformation("Run DemoJob Execute");
+            this.logger.LogInformation("Run DemoJob Execute {0}",DateTimeOffset.Now);
             return Task.CompletedTask;
         }
     }
