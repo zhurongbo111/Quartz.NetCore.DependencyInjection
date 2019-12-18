@@ -1,4 +1,4 @@
-# ExpressionToWhereClause.Net 
+# Quartz.NetCore.DependencyInjection
 The project is the extensions of Quartz for .net core project, it benefits you from DependencyInjection.
 
 [![Build status](https://zhurongbo.visualstudio.com/Common.Core/_apis/build/status/Quartz.NetCore.DependencyInjection)](https://zhurongbo.visualstudio.com/Common.Core/_build/latest?definitionId=28)
@@ -6,7 +6,7 @@ The project is the extensions of Quartz for .net core project, it benefits you f
 Packages
 --------
 
-NuGet feed: https://www.nuget.org/packages/ExpressionToWhereClause/
+NuGet feed: https://www.nuget.org/packages/Quartz.NetCore.DependencyInjection/
 
 | Package | NuGet Stable | NuGet Pre-release | Downloads |
 | ------- | ------------ | ----------------- | --------- |
