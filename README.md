@@ -40,7 +40,7 @@ app.ApplicationServices.UseQuartzJob<DemoJob>(
                                       .StartAt(DateTime.Now.AddSeconds(10))
                                       .WithSimpleSchedule(
                                               ssb => ssb.WithInterval(TimeSpan.FromSeconds(10))
-                                              .RepeatForever())
+                                                        .RepeatForever())
                                       .Build()
            );
 app.ApplicationServices.StartQuartzJob()
