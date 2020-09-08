@@ -1,0 +1,36 @@
+name: nuget publish
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore src/Quartz.NetCore.DependencyInjection.sln
+    - name: Build
+      run: dotnet build src/Quartz.NetCore.DependencyInjection.sln --configuration Release --no-restore
+    - name: Test
+      run: dotnet test src/Quartz.NetCore.DependencyInjection.Tests/Quartz.NetCore.DependencyInjection.Tests.csproj --no-restore --verbosity normal
+      
+    - name: Publish NuGet
+      uses: rohith/publish-nuget@v2.2.1
+      with:
+        PROJECT_FILE_PATH: src/Quartz.NetCore.DependencyInjection/Quartz.NetCore.DependencyInjection.csproj
+        TAG_COMMIT: false
+        VERSION_FILE_PATH: src/Quartz.NetCore.DependencyInjection/Quartz.NetCore.DependencyInjection.csproj
+        VERSION_REGEX: <Version>(.*)<\/Version>
+        NUGET_KEY: ${{ secrets.NugetKey }} 
+
