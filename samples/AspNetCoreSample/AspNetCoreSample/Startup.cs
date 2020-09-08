@@ -25,13 +25,7 @@ namespace AspNetCoreSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddQuartzJob<DemoJob>();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
-        {
-            app.ApplicationServices.UseQuartzJob<DemoJob>(
+            services.ConfigQuartzJob<DemoJob>(
                 jobBuilder => jobBuilder.WithIdentity("DemoJobKey").Build(),
                 //Run job every 10 seconds
                 triggerBuild => triggerBuild.WithIdentity("DemoJobTriggerKey")
@@ -39,13 +33,18 @@ namespace AspNetCoreSample
                                             .WithSimpleSchedule(
                                                     ssb => ssb.WithInterval(TimeSpan.FromSeconds(10))
                                                     .RepeatForever())
-                                            .Build()
-                 );
+                                            .Build());
+        }
 
-            app.ApplicationServices.StartQuartzJob();
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
+        {
+
+
+            app.ApplicationServices.StartQuartzJobs();
 
             applicationLifetime.ApplicationStopping.Register(() => {
-                app.ApplicationServices.StopQuartzJob();
+                app.ApplicationServices.StopQuartzJobs();
             });
 
             app.UseRouting();

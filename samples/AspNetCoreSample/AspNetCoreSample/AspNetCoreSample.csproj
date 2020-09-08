@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Quartz.NetCore.DependencyInjection" Version="1.0.5" />
+    <ProjectReference Include="..\..\..\src\Quartz.NetCore.DependencyInjection\Quartz.NetCore.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>
