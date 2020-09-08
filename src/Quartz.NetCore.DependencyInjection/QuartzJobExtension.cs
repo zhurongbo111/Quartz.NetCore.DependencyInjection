@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Quartz.NetCore.DependencyInjection
 {
+    [Obsolete("Will be removed in future")]
     public static class QuartzJobExtension
     {
         private const string DefaultJobGroup = "DefaultJobGroup";
@@ -16,6 +17,7 @@ namespace Quartz.NetCore.DependencyInjection
 
         private const string DefaultSechedule = "DefaultSechedule";
 
+        [Obsolete("Please use ConfigQuartzJob instead")]
         public static IServiceCollection AddQuartzJob<TJob>(this IServiceCollection services, ServiceLifetime jobLifetime = ServiceLifetime.Transient)
             where TJob : class, IJob
         {
@@ -36,6 +38,7 @@ namespace Quartz.NetCore.DependencyInjection
             return services;
         }
 
+        [Obsolete("Please use ConfigQuartzJob instead")]
         public static IServiceProvider UseQuartzJob<TJob>(this IServiceProvider applicationServices, Func<JobBuilder, IJobDetail> configJobDetail = null, Func<TriggerBuilder, ITrigger> configTrigger = null, string schedName = DefaultSechedule)
             where TJob : IJob
         {
@@ -52,7 +55,7 @@ namespace Quartz.NetCore.DependencyInjection
             return applicationServices;
         }
 
-
+        [Obsolete("Please use ConfigQuartzJob instead")]
         public static IServiceProvider UseQuartzJobWithRepeat<TJob>(this IServiceProvider applicationServices, DateTime startTime, TimeSpan intervalTime, string schedName = DefaultSechedule)
             where TJob : IJob
         {
@@ -68,6 +71,7 @@ namespace Quartz.NetCore.DependencyInjection
             return applicationServices;
         }
 
+        [Obsolete("Please use StartQuartzJobs instead")]
         public static IServiceProvider StartQuartzJob(this IServiceProvider applicationServices)
         {
             var schedulerFactory = applicationServices.GetRequiredService<ISchedulerFactory>();
@@ -79,6 +83,7 @@ namespace Quartz.NetCore.DependencyInjection
             return applicationServices;
         }
 
+        [Obsolete("Please use ConfigQuartzJob instead")]
         /// <summary>
         /// Run this job only once, it is suitable for log time job
         /// </summary>
@@ -98,7 +103,7 @@ namespace Quartz.NetCore.DependencyInjection
             return applicationServices;
         }
 
-
+        [Obsolete("Please use StopQuartzJobs instead")]
         public static void StopQuartzJob(this IServiceProvider applicationServices, bool waitForJobsToComplete = true)
         {
             var schedulerFactory = applicationServices.GetRequiredService<ISchedulerFactory>();
@@ -107,12 +112,6 @@ namespace Quartz.NetCore.DependencyInjection
             {
                 schedule.Shutdown(waitForJobsToComplete);
             }
-        }
-
-        public static void TriggerJob<TJob>(this ISchedulerFactory schedulerFactory, string schedName = DefaultSechedule) where TJob : IJob
-        {
-            var schedule = GetScheduler(schedulerFactory, schedName);
-            schedule.TriggerJob(GetDefaultJobKey<TJob>());
         }
 
         private static JobKey GetDefaultJobKey<TJob>() where TJob : IJob
