@@ -29,7 +29,8 @@ using Quartz.NetCore.DependencyInjection;
 
 In `ConfigureServices`, you need register jobs to container:
 ```csharp
-jobBuilder => jobBuilder.WithIdentity("DemoJobKey").Build(),
+    services.ConfigQuartzJob<DemoJob>(
+                jobBuilder => jobBuilder.WithIdentity("DemoJobKey").Build(),
                 //Run job every 10 seconds
                 triggerBuild => triggerBuild.WithIdentity("DemoJobTriggerKey")
                                             .StartAt(DateTime.Now.AddSeconds(10))
