@@ -1,7 +1,7 @@
 # Quartz.NetCore.DependencyInjection
 The project is the extensions of Quartz for .net core project, it benefits you from DependencyInjection.
 
-[![Build status](https://zhurongbo.visualstudio.com/Common.Core/_apis/build/status/Quartz.NetCore.DependencyInjection)](https://zhurongbo.visualstudio.com/Common.Core/_build/latest?definitionId=28)
+![nuget publish](https://github.com/zhurongbo111/Quartz.NetCore.DependencyInjection/workflows/nuget%20publish/badge.svg?branch=master)
 
 Packages
 --------
