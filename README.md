@@ -29,26 +29,23 @@ using Quartz.NetCore.DependencyInjection;
 
 In `ConfigureServices`, you need register jobs to container:
 ```csharp
-services.AddQuartzJob<DemoJob>();
+jobBuilder => jobBuilder.WithIdentity("DemoJobKey").Build(),
+                //Run job every 10 seconds
+                triggerBuild => triggerBuild.WithIdentity("DemoJobTriggerKey")
+                                            .StartAt(DateTime.Now.AddSeconds(10))
+                                            .WithSimpleSchedule(
+                                                    ssb => ssb.WithInterval(TimeSpan.FromSeconds(10))
+                                                    .RepeatForever())
+                                            .Build());
 ```
 Then in `Configure`, you need use this job and start:
 ```csharp
-app.ApplicationServices.UseQuartzJob<DemoJob>(
-          jobBuilder => jobBuilder.WithIdentity("DemoJobKey").Build(),
-          //Run job every 10 seconds
-          triggerBuild => triggerBuild.WithIdentity("DemoJobTriggerKey")
-                                      .StartAt(DateTime.Now.AddSeconds(10))
-                                      .WithSimpleSchedule(
-                                              ssb => ssb.WithInterval(TimeSpan.FromSeconds(10))
-                                                        .RepeatForever())
-                                      .Build()
-           );
-app.ApplicationServices.StartQuartzJob()
+app.ApplicationServices.StartQuartzJobs()
 ```
 
 At last if you want to stop the job when application is stopping, you can inject `IHostApplicationLifetime` to `Configure` method and  add follow:
 ```csharp
 applicationLifetime.ApplicationStopping.Register(() => {
-    app.ApplicationServices.StopQuartzJob();}
+    app.ApplicationServices.StopQuartzJobs();}
 );
 ```
