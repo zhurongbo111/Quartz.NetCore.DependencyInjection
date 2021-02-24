@@ -39,14 +39,11 @@ In `ConfigureServices`, you need register jobs to container:
                                                     .RepeatForever())
                                             .Build());
 ```
-Then in `Configure`, you need use this job and start:
-```csharp
-app.ApplicationServices.StartQuartzJobs()
-```
 
-At last if you want to stop the job when application is stopping, you can inject `IHostApplicationLifetime` to `Configure` method and  add follow:
+
+If you are in asp.net core 3.1 or later, you can just call:
 ```csharp
-applicationLifetime.ApplicationStopping.Register(() => {
-    app.ApplicationServices.StopQuartzJobs();}
-);
-```
+services.AutoStartQuartzJob()
+``
+
+else you need get `QuartzLifeTimeManager` instance from container, then call then `Start` method. Note: You should get instance at root service provider
