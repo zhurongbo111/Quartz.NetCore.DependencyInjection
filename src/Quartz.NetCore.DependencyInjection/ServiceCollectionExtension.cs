@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
-using Quartz;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Quartz.Impl;
-using Quartz.NetCore.DependencyInjection;
 using Quartz.Spi;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Quartz.NetCore.DependencyInjection
 {
     public static partial class ServiceCollectionExtension
     {
@@ -46,6 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
+#if NETSTANDARD2_0
         public static IServiceProvider StartQuartzJobs(this IServiceProvider serviceProvider)
         {
             var starter = serviceProvider.GetRequiredService<QuartzLifeTimeManager>();
@@ -63,5 +61,32 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return serviceProvider;
         }
+#endif
+
+#if NET5_0 || NETCOREAPP3_1
+
+        private static bool hostServiceAdded = false;
+
+        public static IServiceCollection ConfigQuartzJobAndAutoStart<TJob>(this IServiceCollection services, Func<JobBuilder, IJobDetail> configJobDetail = null, Func<TriggerBuilder, ITrigger> configTrigger = null, ServiceLifetime jobLifetime = ServiceLifetime.Transient)
+            where TJob : class, IJob
+        {
+            services.ConfigQuartzJob<TJob>(configJobDetail, configTrigger, jobLifetime);
+
+            services.AutoStartQuartzJob();
+
+            return services;
+        }
+
+        public static IServiceCollection AutoStartQuartzJob(this IServiceCollection services)
+        {
+            if (!hostServiceAdded)
+            {
+                hostServiceAdded = true;
+                services.AddHostedService<QuartzStartBackgroundService>();
+            }
+
+            return services;
+        }
+#endif
     }
 }
