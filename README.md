@@ -44,6 +44,6 @@ In `ConfigureServices`, you need register jobs to container:
 If you are in asp.net core 3.1 or later, you can just call:
 ```csharp
 services.AutoStartQuartzJob()
-``
+```
 
 else you need get `QuartzLifeTimeManager` instance from container, then call then `Start` method. Note: You should get instance at root service provider
