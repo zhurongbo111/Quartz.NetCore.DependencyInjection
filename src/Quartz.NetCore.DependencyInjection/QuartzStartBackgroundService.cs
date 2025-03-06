@@ -1,4 +1,4 @@
-﻿#if NET5_0 || NETCOREAPP3_1
+﻿#if NET5_0_OR_GREATER
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
