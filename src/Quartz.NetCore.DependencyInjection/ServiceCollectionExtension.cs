@@ -63,7 +63,7 @@ namespace Quartz.NetCore.DependencyInjection
         }
 #endif
 
-#if NET5_0 || NETCOREAPP3_1
+#if NET5_0_OR_GREATER
 
         private static bool hostServiceAdded = false;
 
