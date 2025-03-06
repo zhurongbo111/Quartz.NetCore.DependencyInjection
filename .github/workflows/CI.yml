@@ -1,11 +1,11 @@
-name: nuget publish
+name: CI
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  build:
+  ci:
 
     runs-on: ubuntu-latest
 
