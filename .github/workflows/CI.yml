@@ -1,0 +1,26 @@
+name: nuget publish
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 9.0.*
+    - name: Install dependencies
+      run: dotnet restore src/Quartz.NetCore.DependencyInjection.sln
+    - name: Build
+      run: dotnet build src/Quartz.NetCore.DependencyInjection.sln --configuration Release --no-restore
+    - name: Test
+      run: dotnet test src/Quartz.NetCore.DependencyInjection.Tests/Quartz.NetCore.DependencyInjection.Tests.csproj --no-restore --verbosity normal
+
+
