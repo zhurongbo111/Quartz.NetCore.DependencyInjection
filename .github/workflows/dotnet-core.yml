@@ -3,6 +3,8 @@ name: nuget publish
 on:
   push:
     branches: [ master ]
+    paths:
+      - '**/Quartz.NetCore.DependencyInjection.csproj'
 
 jobs:
   build:
